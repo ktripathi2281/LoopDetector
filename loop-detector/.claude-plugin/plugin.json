@@ -1,0 +1,50 @@
+{
+  "name": "loop-detector",
+  "version": "0.2.0",
+  "description": "Warns when Claude Code seems stuck repeating the same edits, commands or failures",
+  "author": { "name": "Kaustubh Tripathi" },
+  "homepage": "https://github.com/ktripathi2281/LoopDetector",
+  "license": "MIT",
+  "keywords": ["loop", "productivity", "mod", "hooks"],
+  "types": "./types/index.d.ts",
+  "userConfig": {
+    "warnAt": {
+      "type": "string",
+      "title": "Warn from band",
+      "description": "The loop-score band that shows a warning: suspicious (40+) or loop (70+)",
+      "default": "loop",
+      "options": ["suspicious", "loop"]
+    },
+    "rethink": {
+      "type": "string",
+      "title": "Rethink behavior",
+      "description": "What Rethink does: warn (only warn: draft the rethink prompt in your prompt box), confirm (pause Claude and ask before sending it), inject (pause Claude and send it at once)",
+      "default": "warn",
+      "options": ["warn", "confirm", "inject"]
+    },
+    "commandRepeats": {
+      "type": "number",
+      "title": "Command repetition at full strength",
+      "description": "Runs of one command at which the command-repetition signal is at full strength",
+      "default": 4
+    },
+    "fileEdits": {
+      "type": "number",
+      "title": "File repetition at full strength",
+      "description": "Edits to one file at which the file-repetition signal is at full strength",
+      "default": 5
+    },
+    "failureRepeats": {
+      "type": "number",
+      "title": "Error repetition at full strength",
+      "description": "Sightings of one error at which the error-repetition signal is at full strength",
+      "default": 3
+    },
+    "cycleRepeats": {
+      "type": "number",
+      "title": "Cycle repetition at full strength",
+      "description": "Repeats of a cycle, after its first time, at which the cycle signals are at full strength",
+      "default": 2
+    }
+  }
+}

@@ -1,0 +1,4 @@
+# Written by Claude Code when it loads the mod from disk; regenerated per version.
+loop-detector/.claude-plugin/types/
+.claude/types/
+node_modules/
