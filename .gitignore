@@ -2,3 +2,5 @@
 loop-detector/.claude-plugin/types/
 .claude/types/
 node_modules/
+# The staged-loop demo and its recordings.
+demo/
