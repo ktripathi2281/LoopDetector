@@ -324,6 +324,22 @@ test('Rethink set to inject while Claude is idle just sends', async ($, on) => {
   expect(world.submitted).toEqual([RETHINK])
 })
 
+test('/loops now rethinks without a click', async ($, on) => {
+  const world = engine(on)
+  const clock = mock.clock(on)
+  expect((await $.command.run(typed('loops', 'now'))).text).toBe('Loop Detector: nothing is repeating right now.')
+
+  await $.command.run(typed('loops', 'rethink inject'))
+  await $.turn.start({ text: 'make the auth test pass', turnId: 'turn-1' })
+  await stagnantLoop($, 3)
+  expect((await $.command.run(typed('loops', 'now'))).text).toBe(
+    'Loop Detector: rethink requested for auth.ts → run tests → same failure ×4.',
+  )
+  await clock.advance(10)
+  expect(world.aborted).toEqual(['turn-1'])
+  expect(world.submitted).toEqual([RETHINK])
+})
+
 test('a short band draws the card in three lines', async ($, on) => {
   engine(on)
   await stagnantLoop($, 3)

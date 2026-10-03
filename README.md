@@ -46,6 +46,8 @@ Mods (plugins of function hooks) are early access. If your Claude Code build say
 | **Pause** (`p`) | Ends Claude's current turn and offers a prompt suggestion (Tab to take it). Shown while Claude is working. |
 | **Continue** (`c`) | Hides the card. The same loop stays quiet unless it gets meaningfully worse. |
 
+No mouse? `/loops` opens the detailed view and `/loops now` does what Rethink does. Both run even while Claude is working, so they also help in terminals that don't pass clicks through, or under screen recorders that swallow clicks.
+
 The detailed view lists the repeated cycle step by step, how often it occurred, the files involved, the repeated failure, the recent activity (each run, then its result), why it was flagged, and the seven signals behind the score.
 
 ## How it decides

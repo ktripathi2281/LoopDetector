@@ -1,6 +1,6 @@
 {
   "name": "loop-detector",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Warns when Claude Code seems stuck repeating the same edits, commands or failures",
   "author": { "name": "Kaustubh Tripathi" },
   "homepage": "https://github.com/ktripathi2281/LoopDetector",

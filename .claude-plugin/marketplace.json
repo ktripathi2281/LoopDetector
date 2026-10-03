@@ -5,14 +5,14 @@
   },
   "metadata": {
     "description": "Loop Detector: a Claude Code mod that warns when Claude is stuck repeating itself",
-    "version": "0.2.0"
+    "version": "0.2.1"
   },
   "plugins": [
     {
       "name": "loop-detector",
       "source": "./loop-detector",
       "description": "Warns when Claude Code seems stuck repeating the same edits, commands or failures",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "author": { "name": "Kaustubh Tripathi" },
       "license": "MIT",
       "keywords": ["loop", "productivity", "mod", "hooks"],

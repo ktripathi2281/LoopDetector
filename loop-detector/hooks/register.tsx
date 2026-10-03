@@ -237,8 +237,10 @@ export const register: Register = (on, options) => {
   on('session.start', async ($, e, next) => {
     await $.command.register({
       name: COMMAND,
-      description: 'Loop Detector: inspect repetition in this session',
-      argumentHint: '[reset | rethink warn|confirm|inject]',
+      description: 'Loop Detector: inspect repetition (now: Rethink without a click)',
+      argumentHint: '[now | reset | rethink warn|confirm|inject]',
+      // Runs while Claude is still working, so `/loops now` can interrupt a loop as the button does.
+      immediate: true,
     })
     $.ui.status(indicator(assess(await read($, actionsAtom), settings.thresholds), COMMAND))
     return next(e)
@@ -291,6 +293,13 @@ export const register: Register = (on, options) => {
     if (verb === 'reset') {
       await reset($)
       return { text: 'Loop Detector: history cleared.' }
+    }
+    if (verb === 'now') {
+      const assessment = assess(await read($, actionsAtom), settings.thresholds)
+      if (assessment.pattern === '') return { text: 'Loop Detector: nothing is repeating right now.' }
+      // After the command has answered: a prompt cannot be submitted from inside a command's own run.
+      $.clock.after(0, () => void rethink($, assessment, settings.rethink))
+      return { text: `Loop Detector: rethink requested for ${assessment.pattern} ×${assessment.repetitions}.` }
     }
     if (verb === 'rethink') {
       const mode = RETHINK_MODES.find(m => m === value)
